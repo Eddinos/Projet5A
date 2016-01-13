@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="App" ng-controller="panelElementsCtrl as ctr">
+<head>
+	<title>Panel Elements</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<!--------------	Navbar		---------------->
+	<div class="row">
+		<div class="navbar navbar-inverse navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="home.html">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<li class="active"><a href="panelElements.html">Panels</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!--------------	Body	---------------->
+
+	<div class="row">
+		<div class="container jumbotron col-sm-4 col-sm-offset-1">
+			<h3 class="text-center">#0  {{elementList[0].name}}, {{elementList[0].type}}</h3>
+		</div>
+		<div class="container col-sm-4 col-sm-4 col-sm-offset-2">
+			<form>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container jumbotron col-sm-2 col-sm-offset-1 text-center">
+			<h3>#1  {{elementList[2].name}}, {{elementList[2].type}}</h3>
+		</div>
+		<div class="container jumbotron col-sm-2  text-center" style="background-color:red">
+			<h3>#2  {{elementList[3].name}}, {{elementList[3].type}}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container jumbotron col-sm-4 col-sm-offset-1">
+			<h3 class="text-center">#3  {{elementList[1].name}}, {{elementList[1].type}}</h3>
+		</div>
+	</div>
+	
+
+
+	<!-------------- Lib -------------->
+	<script src="lib/jquery-1.11.3.min.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
+	<script src="lib/angular.min.js"></script>
+	<script type="text/javascript" src="js/application/App.js"></script>
+	<script type="text/javascript" src="js/controllers/panelElementsCtr.js"></script>
+	<script type="text/javascript" src="js/services/panelService.js"></script>
+
+
+</body>
+</html>
