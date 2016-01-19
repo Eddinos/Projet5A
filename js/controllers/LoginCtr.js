@@ -1,8 +1,8 @@
 angular.module('App').controller('loginCtrl',loginCtrFnt);
 
-loginCtrFnt.$inject=['$scope','$log', '$window', '$http', '$q'];
+loginCtrFnt.$inject=['$scope', '$http', '$q', 'login'];
 
-function loginCtrFnt($scope, $log, $window, $http, $q)
+function loginCtrFnt($scope, $http, $q, login)
 {
 	$scope.addCompany = function(company)
 	{
@@ -11,22 +11,48 @@ function loginCtrFnt($scope, $log, $window, $http, $q)
 		var companyJson = angular.toJson(company, true);
 		console.log(companyJson);
 		
-		var deferred = $q.defer();
-		$http.post('#', companyJson)
-			.success(function(data, status, headers, config)
-			{
-				deferred.resolve(companyJson);
-			})
-			.
-			error(function(data, status, headers, config)
-			{
-				deferred.reject("wrong login or password");
-			});
-			return deferred.promise;
+		var promise = login.register(companyJson)
+
+		promise.then(function(name) 
+		{
+			
+			alert("Welcome " + name);
+		    
+
+		}, 
+		function(reason) 
+		{
+		  alert('Failed: ' + reason);
+		}, 
+		function(role) 
+		{
+		  alert('Got notification: ' + role);
+		});
 	};
 
-	$scope.loginCompany = function(login, pwd)
+	$scope.loginCompany = function(loginCompany)
 	{
-		console.log(login + " et " + pwd);
+		login.checkCompany(loginCompany);
+		var promise = login.checkCompany(loginCompany)
+
+		promise.then(function(successMsg) 
+		{
+			alert(successMsg);
+		    //localStorage.companyName = loginCompany.name;
+		}, 
+		function(reason) 
+		{
+		  //$('#connectedUserName').html(loginCompany.email.split('@')[0]);
+		  //console.log($('connectedUserName'));
+		  alert('Failed: ' + reason);
+		}, 
+		function(role) 
+		{
+		  alert('Got notification: ' + role);
+		});
+	};
+
+	$scope.deconnect = function(){
+		localStorage.connectedUser = { 	}
 	};
 }

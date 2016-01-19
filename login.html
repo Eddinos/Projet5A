@@ -25,20 +25,31 @@
 						<li><a href="#contact">Contact</a></li>
 						<li><a href="panelElements.html">Panels</a></li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="user-page.html">My account</a></li>
+						<li class="dropdown" ng-hide="localStorage.connectedUser != {}">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="connectedUserName"><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="user-page.html">My account</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#" ng-click="deconnect()">Deconnect</a></li>
+							</ul>
+						</li>
+					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+	<div>
 
-
-	<div class="row">
-		<div class="container">
-			<h2>You need to be registered to use this service</h2></div>
+		<div class="row">
+			<div class="container">
+				<h2>You need to be registered to use this service</h2></div>
+			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		
+		<div class="row">
+
 			<div class="col-sm-3 col-sm-offset-1 form-box">
 				<div class="form-top">
 					<div class="form-top-left">
@@ -51,7 +62,7 @@
 					</div>
 				</div>
 				<div class="form-bottom">
-					<form role="form" ng-submit="loginCompany(logCompany.email, logCompany.password)" method="post" class="login-form">
+					<form role="form" ng-submit="loginCompany(logCompany)" method="post" class="login-form">
 						<div class="form-group">
 							<label class="sr-only" for="form-companyname">Email</label>
 							<input type="email" name="form-companyname" placeholder="e-mail address..."class="form-companyname form-control" id="form-companyname" ng-model="logCompany.email">
@@ -374,18 +385,27 @@
 						<button type="submit" class="btn">Sign up</button>
 					</form>
 				</div>
-			
+
+			</div>
 		</div>
 	</div>
-
-	<style type="text/css">
-
-	</style>
 
 	<script src="lib/jquery-1.11.3.min.js"></script>
 	<script src="lib/bootstrap.min.js"></script>
 	<script src="lib/angular.min.js"></script>
 	<script type="text/javascript" src="js/application/App.js"></script>
 	<script type="text/javascript" src="js/controllers/LoginCtr.js"></script>
+	<script type="text/javascript" src="js/services/panelService.js"></script>	
+	<script type="text/javascript" src="js/services/mediaService.js"></script>
+	<script type="text/javascript" src="js/services/loginService.js"></script>
+	<script type="text/javascript" src="lib/angular-dragdrop.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		if(typeof localStorage.connectedUser.name != "undefined")
+		{
+			$("#connectedUserName").html(JSON.parse(localStorage.connectedUser).name);
+		}
+	})
+	</script>
 </body>
 </html>

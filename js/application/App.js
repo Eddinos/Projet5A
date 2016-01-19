@@ -1,1 +1,1 @@
-angular.module('App', ['panelService']);
+angular.module('App', ['panelService', 'ngDragDrop', 'mediaService', 'loginService']);

@@ -25,35 +25,62 @@
 						<li><a href="#contact">Contact</a></li>
 						<li class="active"><a href="panelElements.html">Panels</a></li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#about">Mon compte</a></li>
+					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
 	<!--------------	Body	---------------->
 
-	<div class="row">
-		<div class="container jumbotron col-sm-4 col-sm-offset-1">
-			<h3 class="text-center">#0  {{elementList[0].name}}, {{elementList[0].type}}</h3>
+	<div class="col-sm-4 col-sm-offset-1 container">
+		<div class="row">
+			<div class="container jumbotron col-sm-12">
+				<h3 class="text-center">{{elementList[0].name}} {{elementList[0].type}}</h3>
+			</div>
 		</div>
-		<div class="container col-sm-4 col-sm-4 col-sm-offset-2">
-			<form>
+		<div class="row">
+			<!--<div class="thumbnail col-sm-6 text-center" data-drop="true" data-jqyoui-options jqyoui-droppable style="height:160px">-->
+				<div class="jumbotron text-center col-sm-6" data-drag="false" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true, containment:'parent'}">
+					<h3>{{elementList[2].name}} {{elementList[2].type}}</h3>
+				</div>
+			<!--</div>-->
+			<div class="container jumbotron col-sm-6 text-center" style="background-color:red">
+				<h3>{{elementList[3].name}} {{elementList[3].type}}</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="container jumbotron col-sm-12">
+				<h3 class="text-center">{{elementList[1].name}} {{elementList[1].type}}</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-sm-4 col-sm-4 col-sm-offset-2">
+		<div class="form-top">
+			<div class="form-top-left">
+				<h3>Is this configuration satisfying?</h3>
+				<div class="row">
+					<h3>You can validate this panel</h3>
+					<button class="btn btn-success btn-lg pull-right"> <span class="glyphicon glyphicon-ok"> Validate</span> </button>
+				</div>
+				<h3>Or edit elements priority</h3>
+			</div>
+		</div>
+		<div class="form-bottom">
+			<form role="form" class="edit-form">
+				<div class="form-group" ng-repeat="elt in elementList" ng-hide="elt==null">
+					<div class="form-group col-sm-8">
+						<h4 class="col-sm-6">Element {{elt.name}}: </h4>
+					</div>
+					<div class="col-sm-3 form-group">
+						<input type="number" ng-model="elt.priority" class="form-control" onchange="angular.element(this).scope().editPreview()">
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
-	<div class="row">
-		<div class="container jumbotron col-sm-2 col-sm-offset-1 text-center">
-			<h3>#1  {{elementList[2].name}}, {{elementList[2].type}}</h3>
-		</div>
-		<div class="container jumbotron col-sm-2  text-center" style="background-color:red">
-			<h3>#2  {{elementList[3].name}}, {{elementList[3].type}}</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="container jumbotron col-sm-4 col-sm-offset-1">
-			<h3 class="text-center">#3  {{elementList[1].name}}, {{elementList[1].type}}</h3>
-		</div>
-	</div>
-	
 
 
 	<!-------------- Lib -------------->
@@ -63,6 +90,14 @@
 	<script type="text/javascript" src="js/application/App.js"></script>
 	<script type="text/javascript" src="js/controllers/panelElementsCtr.js"></script>
 	<script type="text/javascript" src="js/services/panelService.js"></script>
+	<script type="text/javascript" src="lib/angular-dragdrop.min.js"></script>
+	<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/services/mediaService.js"></script>
+	<script type="text/javascript" src="js/services/loginService.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		angular.element(this).scope().editPreview();
+	})</script>
 
 
 </body>

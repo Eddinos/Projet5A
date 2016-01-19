@@ -24,6 +24,9 @@
 						<li><a href="#contact">Contact</a></li>
 						<li class="active"><a href="panelElements.html">Panels</a></li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#about">Mon compte</a></li>
+					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
@@ -57,7 +60,7 @@
 						<h3>{{elt.type}}</h3>
 					</td>
 					<td class="jumbotron col-sm-6 text-center" style="background-color:#35a79c; border:none">
-						<h3>{{elt.content}}</h3>
+						<h3>{{elt.content.name}}</h3>
 					</td>
 				</tr>
 				<tr>
@@ -77,20 +80,10 @@
 				<div class="form-group">
 					<div class="form-group col-sm-6">
 						<label class="sr-only" for="form-name">Element name</label>
-						<input type="text" name="form-name" ng-model="element.name" class="element-form form-control" placeholder="Name...">
+						<input type="text" name="form-name" ng-model="element.name" class="element-form form-control" placeholder="Name..." required>
 					</div>
 					<div class="form-group col-sm-6">
-						<label class="sr-only" for="form-type">Element name</label>
-						<input type="text" name="form-type" ng-model="element.type" class="element-form form-control" placeholder="Type...">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="form-group col-sm-1">
-						<label class="sr-only" for="form-priority">Element priority</label>
-						<input type="number" name="form-priority" ng-model="element.priority" class="element-form form-control" placeholder="0" value="0" required>
-					</div>
-					<div class="form-group col-sm-6 col-sm-offset-5">
-						<select name="form-content" placeholder="Content..." class="form-content form-control" id="form-content" ng-model="element.content">
+						<select name="form-content" placeholder="Content..." class="form-content form-control" id="form-content" ng-model="element.type" ng-change="newContent()" required>
 							<option value="Video">Video</option>
 							<option value="Image">Image</option>
 							<option value="Patate">Patate</option>
@@ -98,15 +91,49 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group" ng-show="element.content == 'Image' || element.content == 'Video'">
+				<div class="form-group">
+					<div class="form-group col-sm-3" >
+						<label  for="form-priority" style="display:inline-block">Element priority</label>
+						<input type="number" name="form-priority" ng-model="element.priority" class="element-form form-control" placeholder="0" min="1" max="4" required>
+					</div>
+					<div class="form-group col-sm-6 col-sm-offset-3">
+						<label for="form-type">Selected file</label>
+						<input type="text" name="form-type" ng-model="element.content.name" class="element-form form-control" placeholder={{element.content.name}} readonly="readonly" value={{element.content.name}}>
+					</div>
+				</div>
+				<div class="form-group" ng-show="element.type == 'Image' || element.type == 'Video'">
 					<!--<input type="file" class="btn btn-success btn-lg" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>-->
-					<span class="btn btn-default btn-file btn-primary">
-						Browse... <input type="file" onchange="angular.element(this).scope().uploadFile(this.files)">
-					</span>
+					<div class="container">
+						<div class="col-md-12">
+
+							<div class="well">
+								<div id="myCarousel" class="carousel slide" data-interval="false">
+
+									<!-- Carousel items -->
+									<div class="carousel-inner" id="carouselItems">
+										<div class="item active">
+											<div class="row" id="activeItems">
+											</div>
+											<!--/row-->
+										</div>
+										<!--/item-->
+									</div>
+									<!--/carousel-inner-->
+									<a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+
+									<a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+								</div>
+								<!--/myCarousel-->
+							</div>
+							<!--/well-->
+						</div>
+					</div>
+					<a href="media-content.html" class="btn btn-default btn-file btn-primary pull-right">Add extra contents</a>
+					
 				</div>
 				
 				<div class="form-group">
-					<button id="sendExercise" class="btn btn-success btn-lg"> <span class="glyphicon glyphicon-plus-sign"></span> </button>
+					<button id="newElementbutton" class="btn btn-success btn-lg"> <span class="glyphicon glyphicon-plus-sign"></span> </button>
 				</div>
 			</form>
 		</div>
@@ -136,6 +163,11 @@
 	.btn{
 		box-shadow:none;
 	}
+	.selectedImg:target{
+ 		-webkit-box-shadow: 0px 0px 50px rgba(0,50,120,0.8);
+  		-moz-box-shadow: 0px 0px 50px rgba(0,50,120,0.8);
+  		box-shadow: 0px 0px 50px rgba(0,50,120,0.8);
+	}
 	</style>
 
 	<script src="lib/jquery-1.11.3.min.js"></script>
@@ -145,6 +177,11 @@
 	<script type="text/javascript" src="js/controllers/panelElementsCtr.js"></script>
 	<script type="text/javascript" src="js/controllers/loginCtr.js"></script>
 	<script type="text/javascript" src="js/services/panelService.js"></script>
+	<script type="text/javascript" src="js/services/mediaService.js"></script>
+	<script type="text/javascript" src="js/services/loginService.js"></script>
+	<script type="text/javascript" src="lib/angular-dragdrop.min.js"></script>
+	<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+	
 
 </body>
 </html>

@@ -1,16 +1,31 @@
 angular.module('panelService', []).service('panel', panelFnc);
 
-function panelFnc() 
+mediaFnc.$inject=['$http','$q'];
+
+function panelFnc($http, $q) 
 {
-	var elements=[];
-
-	function getElements(){
-		return elements;
-	};
-
 	var fncContainer={
-	 	getElements:getElements
+	 	saveElements:saveElements
  	};
+
+
+ 	function saveElements(){
+ 		var dataToSend = JSON.parse(localStorage.elementList);
+		var deferred = $q.defer();
+		$http.post('#', dataToSend)
+			.success(function(data, status, headers, config)
+			{
+				deferred.resolve("success");
+			})
+			.
+			error(function(data, status, headers, config)
+			{
+				deferred.reject("failure");
+			});
+
+		contentToSend = [];
+		return deferred.promise;
+ 	}
 
  	return fncContainer;
 
